@@ -27,11 +27,15 @@ public class CustomerController {
     public Customer createCustomer(@RequestBody Customer customer) {
         return customerService.saveCustomer(customer);
     }
+//    @PutMapping("/{id}")
+//    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+//        customer.setId(id);
+//        return customerService.saveCustomer(customer);
+//    }
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
-        customer.setId(id);
-        return customerService.saveCustomer(customer);
+        return customerService.updateCustomer(id, customer);
     }
 
     @DeleteMapping("/{id}")

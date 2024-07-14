@@ -1,39 +1,40 @@
 package com.example.warehouse.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Table(name = "customer")
+@Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    public Long getId() {
-        return id;
-    }
+    @Column(name = "phone")
+    private String phone;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Column(name = "address")
+    private String address;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    //this is for security, each customer needs to have their own login credentials
+    @OneToOne(mappedBy = "customer")
+    private User user;
 }
+
+// used the @Getter @Setter annotations despite the presence of @Data cause
+// i have used getters and setters in the service classes of each entity respectively
+// hence @Getter @Setter need to be specified explicitly for the compiler to fetch these methods

@@ -6,35 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-
 @Entity
-@Table(name = "order_entity")
+@Table(name = "warehouse")
 @Data
 @NoArgsConstructor
 @Getter
 @Setter
-public class OrderEntity {
+public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "order_date")
-    private LocalDateTime orderDate;
+    @Column(name = "location")
+    private String location;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "capacity")
+    private Integer capacity;
 
     @Column(name = "quantity")
     private Integer quantity;
-
-    @Column(name = "price")
-    private Double price;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

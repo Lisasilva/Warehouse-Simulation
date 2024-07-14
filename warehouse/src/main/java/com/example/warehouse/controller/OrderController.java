@@ -28,10 +28,15 @@ public class OrderController {
         return orderService.saveOrder(order);
     }
 
+//    @PutMapping("/{id}")
+//    public OrderEntity updateOrder(@PathVariable Long id, @RequestBody OrderEntity orderEntity) {
+//        orderEntity.setId(id);
+//        return orderService.saveOrder(orderEntity);
+//    }
+
     @PutMapping("/{id}")
     public OrderEntity updateOrder(@PathVariable Long id, @RequestBody OrderEntity orderEntity) {
-        orderEntity.setId(id);
-        return orderService.saveOrder(orderEntity);
+        return orderService.updateOrder(id,orderEntity);
     }
 
     @DeleteMapping("/{id}")

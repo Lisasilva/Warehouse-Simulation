@@ -1,5 +1,6 @@
 package com.example.warehouse.controller;
 
+import com.example.warehouse.model.Product;
 import com.example.warehouse.model.Supplier;
 import com.example.warehouse.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,16 @@ public class SupplierController {
         return supplierService.saveSupplier(supplier);
     }
 
+//    @PutMapping("/{id}")
+//    public Supplier updateSupplier(@PathVariable Long id, @RequestBody Supplier supplier) {
+//        supplier.setId(id);
+//        return supplierService.saveSupplier(supplier);
+//    }
+
+
     @PutMapping("/{id}")
     public Supplier updateSupplier(@PathVariable Long id, @RequestBody Supplier supplier) {
-        supplier.setId(id);
-        return supplierService.saveSupplier(supplier);
+        return supplierService.updateSupplier(id, supplier);
     }
 
     @DeleteMapping("/{id}")

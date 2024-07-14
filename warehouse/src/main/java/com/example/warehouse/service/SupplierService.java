@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SupplierService {
@@ -23,6 +24,21 @@ public class SupplierService {
     public Supplier saveSupplier(Supplier supplier) {
         return supplierRepository.save(supplier);
     }
+
+    //logic from stakoverflow to eliminate the usage of setId()
+    public Supplier updateSupplier(Long id, Supplier supplier) {
+        Optional<Supplier> existingSupplier = supplierRepository.findById(id);
+        if (existingSupplier.isPresent()) {
+            Supplier updatedSupplier = existingSupplier.get();
+            updatedSupplier.setName(supplier.getName());
+            updatedSupplier.setContactInfo(supplier.getContactInfo());
+            updatedSupplier.setAddress(supplier.getAddress());
+            return supplierRepository.save(updatedSupplier);
+        } else {
+            throw new RuntimeException("Supplier not found");
+        }
+    }
+
 
     public void deleteSupplier(Long id) {
         supplierRepository.deleteById(id);

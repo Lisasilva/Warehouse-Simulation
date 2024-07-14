@@ -28,10 +28,15 @@ public class ProductController {
         return productService.saveProduct(product);
     }
 
+//    @PutMapping("/{id}")
+//    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+//        product.setId(id);
+//        return productService.saveProduct(product);
+//    }
+
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-        product.setId(id);
-        return productService.saveProduct(product);
+        return productService.updateProduct(id, product);
     }
 
     @DeleteMapping("/{id}")

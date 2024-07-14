@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -22,6 +23,24 @@ public class ProductService {
 
     public Product saveProduct(Product product) {
         return productRepository.save(product);
+    }
+
+    //logic from stakoverflow to eliminate the usage of setId()
+
+    public Product updateProduct(Long id, Product product) {
+        Optional<Product> existingProduct = productRepository.findById(id);
+        if (existingProduct.isPresent()) {
+            Product updatedProduct = existingProduct.get();
+            updatedProduct.setName(product.getName());
+            updatedProduct.setDescription(product.getDescription());
+            updatedProduct.setPrice(product.getPrice());
+            updatedProduct.setCategory(product.getCategory());
+            updatedProduct.setQuantityInStock(product.getQuantityInStock());
+            updatedProduct.setSupplier(product.getSupplier());
+            return productRepository.save(updatedProduct);
+        } else {
+            throw new RuntimeException("Product not found");
+        }
     }
 
     public void deleteProduct(Long id) {
