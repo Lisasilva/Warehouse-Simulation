@@ -35,5 +35,9 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
-    private Supplier supplier; // supplier also has id, so gotta make sure the supplier with this ID exists
+    private Supplier supplier;
+
+    @ManyToOne
+    @JoinColumn(name = "warehouse_id") // Added warehouse relationship
+    private Warehouse warehouse;
 }

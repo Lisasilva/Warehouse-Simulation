@@ -19,6 +19,7 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
+    // used lombok but still not having this function gives an error
     public Role(String name) {
         this.name = name;
     }

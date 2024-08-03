@@ -26,4 +26,16 @@ public class Supplier {
 
     @Column(name = "address")
     private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "warehouse_id")
+    private Warehouse warehouse;
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
 }
